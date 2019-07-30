@@ -13,13 +13,18 @@ Fixed_step.active(0) #the model does not work with the variable time step!
 #Instantiation of the cell template
 cell = Purkinje()
 
+# get maxlength and cut off long dendrites prior to activating multisplit
+maxlength=cell.getmaxlength()
+cutlength=maxlength*.7 # or whatever function of the treatment molecule you want it scaled by
+cell.prune(cutoff=cutlength)
+
 #this code discover the number of cores available in a CPU and activate the multisplit to use them all.
 cores = multiprocessing.cpu_count()
 h.load_file("parcom.hoc")
 p = h.ParallelComputeTool()
 p.change_nthread(cores,1)
 p.multisplit(1)
-print 'cores', cores
+print('cores', cores)
 
 #Neuron control menu
 h.nrncontrolmenu()

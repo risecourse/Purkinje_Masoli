@@ -19,7 +19,7 @@ h.load_file("parcom.hoc")
 p = h.ParallelComputeTool()
 p.change_nthread(cores,1)
 p.multisplit(1)
-print 'cores', cores
+print('cores', cores)
 
 #Neuron control menu
 h.nrncontrolmenu()
